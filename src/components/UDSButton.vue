@@ -97,5 +97,6 @@ export default {
 .uds-button__content {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 </style>
