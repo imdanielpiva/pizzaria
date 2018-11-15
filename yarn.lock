@@ -577,6 +577,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@danielpiva/platform@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@danielpiva/platform/-/platform-0.0.3.tgz#548b3cf4c4439da2b2f8fe8a53c634670e0336ab"
+
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@intervolga/optimize-cssnano-plugin/-/optimize-cssnano-plugin-1.0.6.tgz#be7c7846128b88f6a9b1d1261a0ad06eb5c0fdf8"
