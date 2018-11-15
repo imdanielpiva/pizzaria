@@ -1,9 +1,18 @@
 <template>
-  <div>
-    <div>
+  <div class="uds-welcome">
+    <div class="uds-welcome__content">
       <h1>Pizzaria UDS</h1>
-      <p>Monte já sua pizza!</p>
+      <p>Faça seu pedido online.</p>
+    </div>
 
+    <div class="uds-welcome__media">
+      <img
+        src="@/assets/home-page-illustration.svg"
+        alt="Monte seu pedido de pizza online."
+      />
+    </div>
+
+    <div class="uds-welcome__actions full-width">
       <UDSButton @click="startOrder" :loading="loading">
         Montar minha pizza
       </UDSButton>
@@ -100,3 +109,33 @@ export default {
   }
 };
 </script>
+
+<style>
+.uds-welcome {
+  padding-top: 24px;
+  text-align: center;
+}
+
+.uds-welcome__content {
+  text-align: center;
+}
+
+.uds-welcome__media {
+  margin: 28px 0;
+  text-align: center;
+}
+
+.uds-welcome__media img {
+  width: 100%;
+  max-width: 310px;
+  margin-left: -24px;
+}
+
+.uds-welcome__actions {
+  text-align: center;
+}
+
+.uds-welcome__actions button {
+  margin: 0;
+}
+</style>
