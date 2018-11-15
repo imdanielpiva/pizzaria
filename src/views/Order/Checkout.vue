@@ -55,7 +55,7 @@
 
     <UDSFooter>
       <div slot="content" class="full-width">
-        <UDSButton>Finalizar</UDSButton>
+        <UDSButton class="full-width">Finalizar</UDSButton>
       </div>
     </UDSFooter>
   </div>
