@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+import Home from "@/views/Home.vue";
 
 Vue.use(Router);
 
@@ -10,17 +10,50 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
-    },
-    {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
+      name: "Home",
+      component: Home,
+      redirect: "/welcome",
+      children: [
+        {
+          path: "/welcome",
+          name: "Welcome",
+          component: () =>
+            import(/* webpackChunckName: "welcome" */ "@/views/Welcome.vue")
+        },
+        {
+          path: "/order",
+          name: "Order",
+          redirect: "/order/size",
+          component: () =>
+            import(/* webpackChunckName: "order" */ "@/views/Order/Index.vue"),
+          children: [
+            {
+              path: "/order/size",
+              name: "OrderPizzaSize",
+              component: () =>
+                import(/* webpackChunckName: "pizza-size" */ "@/views/Order/PizzaSize.vue")
+            },
+            {
+              path: "/order/flavor",
+              name: "OrderPizzaFlavor",
+              component: () =>
+                import(/* webpackChunckName: "pizza-flavor" */ "@/views/Order/PizzaFlavor.vue")
+            },
+            {
+              path: "/order/add-on",
+              name: "OrderAddOn",
+              component: () =>
+                import(/* webpackChunckName: "add-on" */ "@/views/Order/AddOn.vue")
+            },
+            {
+              path: "/order/checkout",
+              name: "OrderCheckout",
+              component: () =>
+                import(/* webpackChunckName: "checkout" */ "@/views/Order/Checkout.vue")
+            }
+          ]
+        }
+      ]
     }
   ]
 });
