@@ -126,7 +126,7 @@ export default {
 
 .uds-welcome__media img {
   width: 100%;
-  max-width: 310px;
+  max-width: 260px;
   margin-left: -24px;
 }
 
