@@ -62,7 +62,6 @@ export default {
     }
   },
   methods: {
-    log: e => console.log(e),
     async startOrder() {
       const { shouldRequest } = this;
 
