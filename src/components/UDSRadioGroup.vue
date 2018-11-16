@@ -5,6 +5,7 @@
       v-model="options[index].checked"
       v-for="(option, index) in options"
       :name="name"
+      :disabled="option.disabled"
       :key="`input-radio-group-${index}`"
     >
       <span slot="label">{{ option.label }}</span>
