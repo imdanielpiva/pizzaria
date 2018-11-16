@@ -29,6 +29,7 @@
     "eslint": "^5.8.0",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-vue": "^5.0.0-0",
+    "jest-fetch-mock": "^1.7.4",
     "vue-template-compiler": "^2.5.17"
   }
 }
