@@ -12,6 +12,11 @@
       />
     </div>
 
+    <div v-if="error" class="uds-welcome__error">
+      <h3 class="uds-welcome__error__error-title">Atenção</h3>
+      <p>{{ error }}</p>
+    </div>
+
     <div class="uds-welcome__actions full-width">
       <UDSButton @click="startOrder" :loading="loading">
         Montar minha pizza
@@ -31,7 +36,7 @@ export default {
   data: () => ({
     selected: [],
     loading: false,
-    daniel: false,
+    error: false,
     options: [
       {
         name: "1",
@@ -67,28 +72,38 @@ export default {
 
       this.loading = true;
 
+      if (this.error) {
+        this.error = false;
+      }
+
       if (
         shouldRequest.sizes &&
         shouldRequest.flavors &&
         shouldRequest.addOns
       ) {
-        const makeRequest = request => request();
+        try {
+          const makeRequest = request => request();
 
-        const requests = [
-          this.GET_SIZES,
-          this.GET_ADD_ONS,
-          this.GET_FLAVORS
-        ].map(makeRequest);
+          const requests = [
+            this.GET_SIZES,
+            this.GET_ADD_ONS,
+            this.GET_FLAVORS
+          ].map(makeRequest);
 
-        const [sizes, addOns, flavors] = await Promise.all(requests);
+          const [sizes, addOns, flavors] = await Promise.all(requests);
 
-        this.SET_SIZES(sizes);
-        this.SET_FLAVORS(flavors);
-        this.SET_ADD_ONS(addOns);
+          this.SET_SIZES(sizes);
+          this.SET_FLAVORS(flavors);
+          this.SET_ADD_ONS(addOns);
 
-        this.loading = false;
+          this.loading = false;
 
-        this.$router.push("/order/size");
+          this.$router.push("/order/size");
+        } catch (error) {
+          this.error = "Não foi possível iniciar seu pedido no momento.";
+        } finally {
+          this.loading = false;
+        }
       } else {
         this.$router.push("/order/size");
       }
@@ -120,7 +135,7 @@ export default {
 }
 
 .uds-welcome__media {
-  margin: 28px 0;
+  margin: 12px 0;
   text-align: center;
 }
 
@@ -130,7 +145,20 @@ export default {
   margin-left: -24px;
 }
 
+.uds-welcome__error {
+  width: 100%;
+  max-width: 300px;
+  margin: 16px 0;
+}
+
+.uds-welcome__error-title {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 700;
+}
+
 .uds-welcome__actions {
+  margin-bottom: 24px;
   text-align: center;
 }
 
