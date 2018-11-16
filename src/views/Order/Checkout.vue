@@ -1,68 +1,82 @@
 <template>
   <div class="uds-order-checkout">
-    <div class="slideInRight">
-      <h2>Checkout</h2>
+    <div v-show="!hasConfirmed" class="fadeIn">
+      <div class="slideInRight">
+        <h2>Checkout</h2>
 
-      <ul class="uds-order-checkout__list">
-        <li>
-          <div class="uds-order-checkout__list-item-content">
-            <h3 class="uds-order-checkout__list-item-title">Tamanho</h3>
-            <p>{{ size.name }}</p>
-          </div>
-        </li>
+        <ul class="uds-order-checkout__list">
+          <li>
+            <div class="uds-order-checkout__list-item-content">
+              <h3 class="uds-order-checkout__list-item-title">Tamanho</h3>
+              <p>{{ size.name }}</p>
+            </div>
+          </li>
 
-        <li>
-          <div class="uds-order-checkout__list-item-content">
-            <h3 class="uds-order-checkout__list-item-title">Sabor</h3>
-            <p>{{ flavor.name }}</p>
-          </div>
-        </li>
+          <li>
+            <div class="uds-order-checkout__list-item-content">
+              <h3 class="uds-order-checkout__list-item-title">Sabor</h3>
+              <p>{{ flavor.name }}</p>
+            </div>
+          </li>
 
-        <li v-if="hasAddoOns">
-          <div
-            class="uds-order-checkout__list-item-content uds-order-checkout__list-item-content--block"
-          >
-            <h3 class="uds-order-checkout__list-item-title">Adicionais</h3>
+          <li v-if="hasAddoOns">
+            <div
+              class="uds-order-checkout__list-item-content uds-order-checkout__list-item-content--block"
+            >
+              <h3 class="uds-order-checkout__list-item-title">Adicionais</h3>
 
-            <ul class="uds-order-checkout__add-ons-list">
-              <li v-for="(addOn, index) in addOnsList" :key="`addOn-${index}`">
-                <h4>{{ addOn.name }}</h4>
-                <p>{{ formatPrice(addOn.price || defaultPriceParameter) }}</p>
-              </li>
-            </ul>
-          </div>
-        </li>
+              <ul class="uds-order-checkout__add-ons-list">
+                <li
+                  v-for="(addOn, index) in addOnsList"
+                  :key="`addOn-${index}`"
+                >
+                  <h4>{{ addOn.name }}</h4>
+                  <p>{{ formatPrice(addOn.price || defaultPriceParameter) }}</p>
+                </li>
+              </ul>
+            </div>
+          </li>
 
-        <li>
-          <div class="uds-order-checkout__list-item-content">
-            <h3 class="uds-order-checkout__list-item-title">
-              Tempo de preparo
-            </h3>
-            <p>{{ time }}</p>
-          </div>
-        </li>
+          <li>
+            <div class="uds-order-checkout__list-item-content">
+              <h3 class="uds-order-checkout__list-item-title">
+                Tempo de preparo
+              </h3>
+              <p>{{ time }}</p>
+            </div>
+          </li>
 
-        <li>
-          <div class="uds-order-checkout__list-item-content">
-            <h3 class="uds-order-checkout__list-item-title">Total</h3>
-            <p>{{ price }}</p>
-          </div>
-        </li>
-      </ul>
+          <li>
+            <div class="uds-order-checkout__list-item-content">
+              <h3 class="uds-order-checkout__list-item-title">Total</h3>
+              <p>{{ price }}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <UDSSpacer top="35px" bottom="35px" />
+    <div v-show="hasConfirmed" class="uds-order-checkout__media fadeIn">
+      <img
+        src="@/assets/confirmed-order.svg"
+        alt="Pedido confirmado"
+        class="fadeIn"
+      />
 
-    <UDSFooter>
+      <p>Você será redirionado em alguns segundos.</p>
+    </div>
+
+    <UDSFooter v-if="!hasConfirmed">
       <div slot="content" class="full-width">
-        <UDSButton class="full-width">Finalizar</UDSButton>
+        <UDSButton @click="confirmOrder" class="full-width">
+          Finalizar
+        </UDSButton>
       </div>
     </UDSFooter>
   </div>
 </template>
 
 <script>
-import UDSSpacer from "@/components/UDSSpacer.vue";
 import UDSFooter from "@/components/UDSFooter.vue";
 import UDSButton from "@/components/UDSButton.vue";
 
@@ -70,10 +84,10 @@ export default {
   name: "UDSOrderCheckout",
   components: {
     UDSButton,
-    UDSSpacer,
     UDSFooter
   },
   data: () => ({
+    hasConfirmed: false,
     defaultPriceParameter: {
       value: 0,
       currency: "BRL"
@@ -151,6 +165,11 @@ export default {
     aggregateAddOnsPrices(timeInMinutes, addOn) {
       return timeInMinutes + (addOn.price || { value: 0 }).value;
     },
+    confirmOrder() {
+      this.hasConfirmed = true;
+
+      setTimeout(() => this.$router.push("/"), 3000);
+    },
     formatPrice({ value = 0, currency = "BRL" }) {
       return value.toLocaleString("pt-BR", {
         style: "currency",
@@ -171,6 +190,17 @@ export default {
   border: 1px solid #dedede;
   border-radius: 4px;
   height: calc(100vh - 190px);
+}
+
+.uds-order-checkout__media {
+  margin: auto;
+  text-align: center;
+}
+
+.uds-order-checkout__media img {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
 }
 
 .uds-order-checkout__list {
