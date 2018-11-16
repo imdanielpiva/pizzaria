@@ -1,6 +1,6 @@
 {
-  "name": "uds-pizzaria",
-  "short_name": "uds-pizzaria",
+  "name": "Pizzaria UDS",
+  "short_name": "Pizzaria UDS",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -15,6 +15,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#4DBA87"
+  "background_color": "white",
+  "theme_color": "#ed2621"
 }
