@@ -1,26 +1,40 @@
-# uds-pizzaria
+# ![Pizzaria UDS logo](https://raw.githubusercontent.com/imdanielpiva/pizzaria-uds/c01a9d9bf8fc47d22f3c8b5369eaa5857bd1155e/public/img/icons/android-chrome-48x48.png) Pizzaria UDS [![Build Status](https://travis-ci.org/imdanielpiva/pizzaria-uds.svg?branch=master)](https://travis-ci.org/imdanielpiva/pizzaria-uds)
 
-## Project setup
+Repositório do teste do processo seletivo para Desenvolvedor Front da UDS Tecnologia. O site pode ser acessado em pizzaria.surge.sh.
+
+Esse projeto é baseado na Vue CLI 3 e utiliza bibliotecas e ferramentas como Vuex, VueRouter, Jest, entrega contínua e testes automatizados com Travis CI e Surge e se comunica com um mock de uma REST API no mockable.io.
+
+#### Instale as dependências
 ```
 yarn install
+# ou 
+npm install
 ```
 
-### Compiles and hot-reloads for development
+#### Sirva o projeto com hot-reload
 ```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
+yarn serve
+# ou 
+npm run install
 ```
 
-### Lints and fixes files
+#### Compile para produção
 ```
-yarn run lint
+yarn build
+# ou 
+npm run build
 ```
 
-### Run your unit tests
+#### Linte e corriga os arquivos
 ```
-yarn run test:unit
+yarn lint
+# ou 
+npm run lint
+```
+
+#### Rode a suíte de testes unitários
+```
+yarn test:unit
+# ou 
+npm run test:unit
 ```
