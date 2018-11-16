@@ -10,6 +10,11 @@
     >
       <span slot="label">{{ option.label }}</span>
     </UDSCheckbox>
+
+    <div v-if="error" class="uds-checkbox-group__error">
+      <h3 class="uds-checkbox-group__error-title">Atenção</h3>
+      <p>{{ error }}</p>
+    </div>
   </div>
 </template>
 
@@ -56,3 +61,15 @@ export default {
   }
 };
 </script>
+<style>
+.uds-checkbox-group__error {
+  width: 100%;
+  margin: 16px 0;
+}
+
+.uds-checkbox-group__error-title {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 700;
+}
+</style>
